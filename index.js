@@ -130,11 +130,19 @@ app.delete("/log/:id", (req, res) => {
 
 // MEMBERS|SOCIAL ROUTES
 
-// GET ALL USERS (for members page)
+// GET ALL MEMBERS WITH FILM COUNT, FOLLOWERS AND FOLLOWING COUNT
 app.get("/members", (req, res) => {
-  const sql = "SELECT id,name,email FROM users";
+  const sql = `SELECT users.id, users.name, 
+                 COUNT(DISTINCT logs.id) as film_count,
+                 COUNT(DISTINCT f1.follower_id) as follower_count,
+                 COUNT(DISTINCT f2.following_id) as following_count
+                 FROM users 
+                 LEFT JOIN logs ON users.id = logs.user_id 
+                 LEFT JOIN follows f1 ON users.id = f1.following_id
+                 LEFT JOIN follows f2 ON users.id = f2.follower_id
+                 GROUP BY users.id, users.name`;
   db.query(sql, (err, results) => {
-    if (err) return res.status(500).json({ error: "Could not get members" });
+    if (err) return res.status(500).json({ error: "Database error" });
     res.json(results);
   });
 });
