@@ -1,5 +1,5 @@
 # CineVault Backend
-🔗 **Frontend repo:** [cinevault-frontend](https://github.com/Nirbhaysjain/cinevault-frontend) · **Live demo:** [CineVault](https://cinevault.netlify.app)
+🔗 **Frontend repo:** [cinevault-frontend](https://github.com/Nirbhaysjain/cinevault-frontend) · **Live demo:** [CineVault](https://cinevaultnirbhay.netlify.app)
 
 Node.js + Express REST API for CineVault — a film tracking web app.
 
